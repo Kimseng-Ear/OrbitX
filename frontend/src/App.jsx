@@ -354,15 +354,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Footer */}
-            <div className="p-4 border-t border-white/5 bg-black/20">
-              <button
-                onClick={() => setSelectedCountry(null)}
-                className="w-full py-3 bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/40 rounded-2xl text-[10px] font-black text-white/40 hover:text-red-400 transition-all uppercase tracking-[0.3em]"
-              >
-                End Session
-              </button>
-            </div>
           </div>
         </div>
       )}
