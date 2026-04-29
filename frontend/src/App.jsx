@@ -22,6 +22,7 @@ export default function App() {
   const [locationImages, setLocationImages] = useState([])
   const [isImagesLoading, setIsImagesLoading] = useState(false)
   const [locationSummary, setLocationSummary] = useState('')
+  const [isAnalyticsOpen, setIsAnalyticsOpen] = useState(false)
   const tempHistory = useMemo(() =>
     Array.from({ length: 12 }, (_, i) => ({
       time: `${String(i * 2).padStart(2, '0')}:00`,
@@ -223,14 +224,29 @@ export default function App() {
       </div>
 
       {/* ── Top Bar ── */}
-      <div className="absolute top-0 left-0 right-0 z-30">
-        <TopBar issData={issData} isLoading={isLoading} isNightMode={isNightMode} setNightMode={setIsNightMode} />
+      <div className="absolute top-0 left-0 right-0 z-50">
+        <TopBar 
+          issData={issData} 
+          isLoading={isLoading} 
+          isNightMode={isNightMode} 
+          setNightMode={setIsNightMode} 
+          toggleAnalytics={() => setIsAnalyticsOpen(!isAnalyticsOpen)}
+          isAnalyticsOpen={isAnalyticsOpen}
+        />
       </div>
+
+      {/* ── Mobile Overlay for Analytics ── */}
+      {isAnalyticsOpen && (
+        <div 
+          className="lg:hidden fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm"
+          onClick={() => setIsAnalyticsOpen(false)}
+        />
+      )}
 
       {/* ── Left Selection Detail Panel ── */}
       {selectedCountry && (
-        <div className="absolute top-16 left-8 z-40 w-[22rem] animate-slide-in">
-          <div className="bg-[#0a1622]/95 border border-cyan-500/30 rounded-3xl overflow-hidden backdrop-blur-2xl shadow-[0_0_60px_rgba(0,0,0,0.5)] flex flex-col max-h-[85vh]">
+        <div className="absolute top-20 left-4 right-4 md:left-8 md:right-auto md:w-[22rem] z-40 animate-slide-in">
+          <div className="bg-[#0a1622]/95 border border-cyan-500/30 rounded-3xl overflow-hidden backdrop-blur-2xl shadow-[0_0_60px_rgba(0,0,0,0.5)] flex flex-col max-h-[75vh] md:max-h-[85vh]">
 
             {/* Header */}
             <div className="p-6 pb-4 border-b border-white/10 bg-gradient-to-b from-white/5 to-transparent">
@@ -343,13 +359,14 @@ export default function App() {
       )}
 
       {/* ── Right Analytics Panel ── */}
-      <div className="absolute top-16 right-0 bottom-0 z-30 w-80 xl:w-96">
+      <div className={`fixed top-0 bottom-0 right-0 z-[70] lg:z-30 w-full md:w-80 xl:w-96 transform transition-transform duration-500 ease-in-out lg:translate-x-0 ${isAnalyticsOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <AnalyticsPanel
           issData={issData}
           selectedCountry={selectedCountry}
           weather={weather}
           tempHistory={tempHistory}
           cameraZoom={cameraZoom}
+          onClose={() => setIsAnalyticsOpen(false)}
         />
       </div>
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
-import { Satellite, MapPin, Thermometer, Wind, Droplets, Globe, Navigation, Activity, Zap } from 'lucide-react'
+import { Satellite, MapPin, Thermometer, Wind, Droplets, Globe, Navigation, Activity, Zap, X } from 'lucide-react'
 
 function Section({ title, icon: Icon, children, accent = '#00d4ff' }) {
   return (
@@ -38,33 +38,43 @@ const CustomTooltip = ({ active, payload, label }) => {
   )
 }
 
-export default function AnalyticsPanel({ issData, selectedCountry, weather, tempHistory }) {
+export default function AnalyticsPanel({ issData, selectedCountry, weather, tempHistory, onClose }) {
   const [activeTab, setActiveTab] = useState('overview')
 
   return (
-    <div className="h-full flex flex-col glass border-l border-neon-blue/15 panel-scroll"
+    <div className="h-full flex flex-col glass border-l border-neon-blue/15 panel-scroll overflow-hidden"
       style={{ borderRadius: 0 }}>
 
       {/* Panel header */}
-      <div className="px-4 py-3 border-b border-neon-blue/15 flex-shrink-0">
-        <div className="flex items-center gap-2 mb-2">
-          <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-          <span className="text-[11px] font-mono tracking-[0.25em] text-neon-blue uppercase">Analytics Hub</span>
+      <div className="px-4 py-3 border-b border-neon-blue/15 flex-shrink-0 flex items-center justify-between">
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="text-[11px] font-mono tracking-[0.25em] text-neon-blue uppercase">Analytics Hub</span>
+          </div>
+          {/* Tabs */}
+          <div className="flex gap-1">
+            {['overview', 'satellite', 'weather'].map(t => (
+              <button key={t} onClick={() => setActiveTab(t)}
+                className="px-2.5 py-1 rounded text-[9px] font-mono uppercase tracking-wider transition-all"
+                style={{
+                  background: activeTab === t ? 'rgba(0,212,255,0.15)' : 'transparent',
+                  color: activeTab === t ? '#00d4ff' : 'rgba(255,255,255,0.35)',
+                  border: `1px solid ${activeTab === t ? 'rgba(0,212,255,0.4)' : 'transparent'}`,
+                }}>
+                {t}
+              </button>
+            ))}
+          </div>
         </div>
-        {/* Tabs */}
-        <div className="flex gap-1">
-          {['overview', 'satellite', 'weather'].map(t => (
-            <button key={t} onClick={() => setActiveTab(t)}
-              className="px-2.5 py-1 rounded text-[9px] font-mono uppercase tracking-wider transition-all"
-              style={{
-                background: activeTab === t ? 'rgba(0,212,255,0.15)' : 'transparent',
-                color: activeTab === t ? '#00d4ff' : 'rgba(255,255,255,0.35)',
-                border: `1px solid ${activeTab === t ? 'rgba(0,212,255,0.4)' : 'transparent'}`,
-              }}>
-              {t}
-            </button>
-          ))}
-        </div>
+
+        {/* Close button for mobile */}
+        <button 
+          onClick={onClose}
+          className="lg:hidden p-2 rounded-full bg-white/5 text-white/50 hover:text-white"
+        >
+          <X size={18} />
+        </button>
       </div>
 
       <div className="flex-1 overflow-y-auto p-3 space-y-0">
