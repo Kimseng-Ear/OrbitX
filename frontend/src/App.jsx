@@ -6,6 +6,7 @@ import EarthScene from './components/EarthScene'
 import AnalyticsPanel from './components/AnalyticsPanel'
 import TopBar from './components/TopBar'
 import axios from 'axios'
+import { X } from 'lucide-react'
 import COUNTRIES_DATA from './countries_data.json'
 
 // We will fetch countries dynamically instead of using a hardcoded list
@@ -249,7 +250,15 @@ export default function App() {
           <div className="bg-[#0a1622]/95 border border-cyan-500/30 rounded-3xl overflow-hidden backdrop-blur-2xl shadow-[0_0_60px_rgba(0,0,0,0.5)] flex flex-col max-h-[75vh] md:max-h-[85vh]">
 
             {/* Header */}
-            <div className="p-6 pb-4 border-b border-white/10 bg-gradient-to-b from-white/5 to-transparent">
+            <div className="relative p-6 pb-4 border-b border-white/10 bg-gradient-to-b from-white/5 to-transparent">
+              {/* Top-right close button */}
+              <button 
+                onClick={() => setSelectedCountry(null)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/40 hover:text-white transition-all z-50"
+              >
+                <X size={16} />
+              </button>
+
               <div className="flex items-center gap-4 mb-4">
                 <span className="text-4xl filter drop-shadow-lg">{selectedCountry.flag}</span>
                 <div>
