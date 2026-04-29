@@ -1,4 +1,4 @@
-import { Satellite, Radio, Clock, Wifi, Moon, Sun, LayoutPanelRight, X } from 'lucide-react'
+import { Satellite, Radio, Clock, Wifi, Moon, Sun, LayoutDashboard, X } from 'lucide-react'
 
 function LiveDot() {
   return (
@@ -82,7 +82,7 @@ export default function TopBar({ issData, isLoading, isNightMode, setNightMode, 
           onClick={toggleAnalytics}
           className="lg:hidden p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400"
         >
-          {isAnalyticsOpen ? <X size={18} /> : <LayoutPanelRight size={18} />}
+          {isAnalyticsOpen ? <X size={18} /> : <LayoutDashboard size={18} />}
         </button>
       </div>
     </div>
