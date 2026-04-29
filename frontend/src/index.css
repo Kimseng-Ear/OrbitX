@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon: #00d4ff;
+  --neon-dim: rgba(0, 212, 255, 0.15);
+  --neon-glow: 0 0 20px rgba(0, 212, 255, 0.4), 0 0 60px rgba(0, 212, 255, 0.15);
+  --glass-bg: rgba(2, 12, 35, 0.7);
+  --glass-border: rgba(0, 212, 255, 0.18);
+  --space: #030a1a;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--space);
+  color: #e2f0ff;
+  overflow: hidden;
+}
+
+/* ── Glassmorphism ── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-light {
+  background: rgba(0, 212, 255, 0.06);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 212, 255, 0.12);
+  border-radius: 12px;
+}
+
+/* ── Neon effects ── */
+.neon-text {
+  color: var(--neon);
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+}
+
+.neon-border {
+  border-color: var(--neon) !important;
+  box-shadow: var(--neon-glow);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.3);
+  border-radius: 4px;
+}
+
+/* ── Pulse ring (Phnom Penh / markers) ── */
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+@keyframes pulseDot {
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.9);
+  }
+
+  50% {
+    transform: scale(1.4);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 1);
+  }
+}
+
+.pulse-dot {
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+.pulse-ring {
+  animation: pulseRing 2s ease-out infinite;
+}
+
+.pulse-ring2 {
+  animation: pulseRing 2s ease-out infinite 0.7s;
+}
+
+/* ── Float ── */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* ── Scan line ── */
+@keyframes scanLine {
+  0% {
+    top: -4px;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+  animation: scanLine 6s linear infinite;
+  pointer-events: none;
+}
+
+/* ── Blinking cursor ── */
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* ── Data stream ── */
+@keyframes dataScroll {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.data-stream {
+  animation: dataScroll 12s linear infinite;
+}
+
+/* ── ISS glow trail ── */
+@keyframes issTrail {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.iss-glow {
+  animation: issTrail 2s ease-in-out infinite;
+}
+
+/* ── Country marker ── */
+.country-marker {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.country-marker:hover .marker-label {
+  opacity: 1;
+  transform: translateY(-4px);
+}
+
+.marker-label {
+  opacity: 0;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+/* ── Phnom Penh special glow ── */
+@keyframes phnomGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 12px 4px rgba(255, 200, 0, 0.8);
+  }
+
+  50% {
+    box-shadow: 0 0 30px 10px rgba(255, 200, 0, 1);
+  }
+}
+
+.phnom-glow {
+  animation: phnomGlow 1.5s ease-in-out infinite;
+}
+
+/* ── Chart container ── */
+.recharts-text {
+  fill: rgba(200, 230, 255, 0.7) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(0, 212, 255, 0.1) !important;
+}
+
+/* ── Panel scrollable ── */
+.panel-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100vh - 80px);
+}
+
+/* ── Loading spinner ── */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+/* ── Gradient text ── */
+.gradient-text {
+  background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Orbit ring animation ── */
+@keyframes orbitRotate {
+  from {
+    transform: rotateZ(0deg) rotateX(75deg);
+  }
+
+  to {
+    transform: rotateZ(360deg) rotateX(75deg);
+  }
+}

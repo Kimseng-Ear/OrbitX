@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: orbitx-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+    restart: unless-stopped
+    networks:
+      - orbitx-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: orbitx-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - orbitx-net
+    restart: unless-stopped
+
+networks:
+  orbitx-net:
+    driver: bridge
