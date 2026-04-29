@@ -19,9 +19,9 @@ export default function TopBar({ issData, isLoading, isNightMode, setNightMode, 
 
       {/* Left – Brand */}
       <div className="flex items-center gap-2 md:gap-3">
-        <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center"
-          style={{ background: 'linear-gradient(135deg,#00d4ff,#8b5cf6)', boxShadow: '0 0 14px rgba(0,212,255,0.5)' }}>
-          <span className="text-sm">🌍</span>
+        <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center overflow-hidden"
+          style={{ background: 'transparent', boxShadow: '0 0 14px rgba(0,212,255,0.3)' }}>
+          <img src="/logo.png" alt="OrbitX Logo" className="w-full h-full object-cover" />
         </div>
         <div className="hidden sm:block">
           <div className="text-sm font-bold tracking-widest gradient-text">ORBITX</div>
