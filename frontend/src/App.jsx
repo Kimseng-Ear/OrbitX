@@ -35,7 +35,7 @@ export default function App() {
   useEffect(() => {
     const fetchISS = async () => {
       try {
-        const res = await axios.get('http://127.0.0.1:5005/api/iss-location')
+        const res = await axios.get('/api/iss-location')
         setIssData(res.data)
       } catch {
         // Animate mock ISS position
@@ -71,7 +71,7 @@ export default function App() {
     const { lat, lon, name, capital } = selectedCountry
 
     // 1. Fetch Weather
-    axios.get(`http://127.0.0.1:5005/api/weather/${lat}/${lon}`)
+    axios.get(`/api/weather/${lat}/${lon}`)
       .then(r => setWeather(r.data))
       .catch(() => setWeather({
         temp: 22,
